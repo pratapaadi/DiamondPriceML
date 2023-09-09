@@ -1,0 +1,7 @@
+pandas
+numpy
+seaborn
+flask
+sklearn
+ 
+-e . #links setup.py with requirements while installing required libraries directly from requirements.txt
