@@ -2,6 +2,8 @@ pandas
 numpy
 seaborn
 flask
-sklearn
+scikit-learn
+
+
  
 -e . #links setup.py with requirements while installing required libraries directly from requirements.txt
