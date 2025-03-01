@@ -3,35 +3,43 @@ from src.pipeline.prediction_pipeline import CustomData,PredictPipeline
 app=Flask(__name__)
 
 @app.route('/')
-def home_page():
+def home():
  return render_template('index.html')
 
+@app.route('/form')
+def form_page():
+    return render_template('form.html')
 
-@app.route('/predict',methods=['GET','POST'])
+@app.route('/predict',methods=['POST'])
 def predict_datapoint():
-    if request.method=='GET':
-        return render_template('form.html')
-    
-    else:
-        data=CustomData(
-            carat=float(request.form.get('carat')),
-            depth = float(request.form.get('depth')),
-            table = float(request.form.get('table')),
-            x = float(request.form.get('x')),
-            y = float(request.form.get('y')),
-            z = float(request.form.get('z')),
-            cut = request.form.get('cut'),
-            color= request.form.get('color'),
-            clarity = request.form.get('clarity')
-        )
-        final_new_data=data.get_data_as_dataframe()
-        predict_pipeline=PredictPipeline()
-        pred=predict_pipeline.predict(final_new_data)
+        try:
+                data=CustomData(
+                carat=float(request.form['carat']),
+                depth = float(request.form['depth']),
+                table = float(request.form['table']),
+                x = float(request.form['x']),
+                y = float(request.form['y']),
+                z = float(request.form['z']),
+                cut = request.form['cut'],
+                color= request.form['color'],
+                clarity = request.form['clarity']
+                )
+                final_new_data=data.get_data_as_dataframe()
+                predict_pipeline=PredictPipeline()
+                pred=predict_pipeline.predict(final_new_data)
 
-        results=round(pred[0],2)
-
-        return render_template('form.html',final_result=results)
-    
+                results=round(pred[0],2)
+                return render_template('form.html',final_result=f"{results}")
+        except KeyError as e:
+            return render_template('form.html', 
+                         final_result=f"Missing required field: {e}")
+        except ValueError as e:
+            return render_template('form.html',
+                         final_result=f"Invalid format: {e}")
+        except Exception as e:
+            return render_template('form.html',
+                         final_result=f"Prediction Error: {str(e)}")
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0',debug=True) 
+

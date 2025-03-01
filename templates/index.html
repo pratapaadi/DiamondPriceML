@@ -1,1 +1,27 @@
-<h1> this is the home page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiamondValuePro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=1.1">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DiamondPredict</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('predict_datapoint') }}">Predict Price</a></li>  
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>AI-Powered Diamond Price Prediction</h1>
+            <p>Analyze and predict diamond prices with precision.</p>
+            <a href="{{ url_for('form_page') }}" class="btn">Get Started</a>
+        </div>
+    </header>
+</body>
+</html>
