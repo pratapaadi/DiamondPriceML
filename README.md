@@ -68,11 +68,9 @@ Visit: [http://127.0.0.1:5000](http://127.0.0.1:5000) to access the web applicat
 │── app.py                # Flask Application Entry Point
 │── templates
 │   ├── index.html        # Main Webpage with Form
-│   ├── result.html       # Page to Display Prediction
+│   ├── form.html       # Page to Display Prediction
 │── static
-│   ├── style.css         # CSS File for Styling
-│── model
-│   ├── diamond_model.pkl # Trained Machine Learning Model
+│   ├── style.css         # CSS File for Styling 
 │── data
 │   ├── gemstones.csv     # Dataset used for Training
 │── src
